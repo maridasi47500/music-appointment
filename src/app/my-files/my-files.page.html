@@ -1,37 +1,26 @@
-<ion-header>
-
-	  <ion-navbar color="primary">
-		      <ion-title>My Files</ion-title>
-		        </ion-navbar>
+<ion-header [translucent]="true">
+	  <ion-toolbar>
+		      <ion-title> Ionic Firebase File Upload Demo </ion-title>
+		        </ion-toolbar>
 </ion-header>
-
-
 <ion-content>
-
-	  <ion-card *ngFor="let file of files | async">
+	  <ion-card class="ion-text-center" *ngIf="!isFileUploading && !isFileUploaded">
 		      <ion-card-header>
-			            {{ file.created | date:'medium' }}
+			            <ion-card-title>Choose Images to Upload</ion-card-title>
 				        </ion-card-header>
-
 					    <ion-card-content>
-
-						          <button ion-button block icon-left outline (click)="viewFile(file.url)">
-								          <ion-icon name="eye"></ion-icon>
-									          {{ file.fullPath }}
-										        </button>
-
-											      <button ion-button block outline icon-left color="danger" (click)="deleteFile(file)">
-												              <ion-icon name="trash"></ion-icon> Delete
-													            </button>
-
-														        </ion-card-content>
-
-															  </ion-card>
-
-															    <ion-fab right bottom>
-																        <button ion-fab color="primary" (click)="addFile()">
-																		      <ion-icon name="cloud-upload"></ion-icon>
-																		          </button>
-																			    </ion-fab>
-
+						          <ion-button color="primary" size="medium">
+								          <input type="file" (change)="uploadImage($event.target.files)" />
+									        </ion-button>
+										    </ion-card-content>
+										      </ion-card>
+										        <!-- File upload progress bar -->
+											  <div *ngIf="percentageVal | async as percentage">
+												      Progress: {{ percentage | number }}%
+												          <ion-progress-bar value="{{ percentage / 100 }}"></ion-progress-bar>
+													    </div>
+													      <div *ngIf="trackSnapshot | async as snap">
+														          File size: {{ snap.totalBytes | formatFileSize }} Data transfered: {{
+															      snap.bytesTransferred | formatFileSize }}
+															        </div>
 </ion-content>

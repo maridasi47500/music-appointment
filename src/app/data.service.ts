@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
+import { AngularFireStorage,AngularFireUploadTask } from 'angularfire2/storage';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
+import { map, filter, scan } from 'rxjs/operators';
 
 @Injectable()
 export class DataProvider {
@@ -10,18 +11,18 @@ export class DataProvider {
 	    getFiles() {
 		        let ref = this.db.list('files');
 
-			    return ref.snapshotChanges().map(changes => {
-				          return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
-					      });
+			    return ref.snapshotChanges().pipe(map((changes:any) => {
+				          return changes.map((c:any) => ({ key: c.payload.key, ...c.payload.val() }));
+					      }));
 					        }
 
-						  uploadToStorage(information): AngularFireUploadTask {
+						  uploadToStorage(information:any): AngularFireUploadTask {
 							      let newName = `${new Date().getTime()}.txt`;
 
 							          return this.afStorage.ref(`files/${newName}`).putString(information);
 								    }
 
-								      storeInfoToDatabase(metainfo) {
+								      storeInfoToDatabase(metainfo:any) {
 									          let toSave = {
 											        created: metainfo.timeCreated,
 												      url: metainfo.downloadURLs[0],
@@ -32,7 +33,7 @@ export class DataProvider {
 															    }
 
 
-															      deleteFile(file) {
+															      deleteFile(file:any) {
 																          let key = file.key;
 																	      let storagePath = file.fullPath;
 

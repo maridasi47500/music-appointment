@@ -26,6 +26,14 @@ const routes: Routes = [
   {
     path: 'my-files',
     loadChildren: () => import('./my-files/my-files.module').then( m => m.MyFilesPageModule)
+  },
+  {
+    path: 'cloud-list',
+    loadChildren: () => import('./cloud-list/cloud-list.module').then( m => m.CloudListPageModule)
+  },
+  {
+    path: 'add-music',
+    loadChildren: () => import('./add-music/add-music.module').then( m => m.AddMusicPageModule)
   }
 
 ];

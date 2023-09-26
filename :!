@@ -1,0 +1,76 @@
+import { DataProvider } from '../data.service';
+import { Component } from '@angular/core';
+import { NavController, NavParams } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
+import { Observable } from 'rxjs';
+
+@Component({
+	  selector: 'page-my-files',
+	    templateUrl: 'my-files.page.html',
+})
+export class MyFilesPage {
+	  files: Observable<any>;
+
+	    constructor(public navCtrl: NavController, private dataProvider: DataProvider, private alertCtrl: AlertController, private toastCtrl: ToastController) {
+		        this.files = this.dataProvider.getFiles();
+			  }
+
+			    async addFile() {
+				        let inputAlert = this.alertCtrl.create({
+						      header: 'Store new information',
+						            htmlAttributes: [
+								            {
+										              name: 'info',
+											                placeholder: 'Lorem ipsum dolor...'
+													        }
+														      ],
+														            buttons: [
+																            {
+																		              text: 'Cancel',
+								htmlAttributes:{											                role: 'cancel'
+								}
+																					        },
+																						        {
+																								          text: 'Store',
+																									            handler: (data:any) => {
+																											                this.uploadInformation(data.info);
+																													          }
+																														          }
+																															        ]
+																																    }).then(toast => {
+																																        toast.present();
+																																    });
+
+																																	  }
+
+																																	    async uploadInformation(text:any) {
+																																		        let upload = this.dataProvider.uploadToStorage(text);
+
+																																			    // Perhaps this syntax might change, it's no error here!
+																																			     upload.then().then((res:any) => {
+																																			           this.dataProvider.storeInfoToDatabase(res.metadata).then(() => {
+																																			                   let toast = this.toastCtrl.create({
+																																			                             message: 'New File added!',
+																																			                                       duration: 3000
+																																			                                               }).then(toast => {
+																																			                                                       toast.present();
+																																								       });
+
+																																			                                                             });
+																																			                                                                 });
+																																			                                                                   }
+																																			
+																																			                                                                     async deleteFile(file: any) {
+																																			                                                                         this.dataProvider.deleteFile(file).subscribe(() => {
+																																			                                                                               let toast = this.toastCtrl.create({
+																																			                                                                                       message: 'File removed!',
+																																			                                                                                               duration: 3000
+																																			                                                                                                     }).then(toast => {
+																																			                                                                                                           toast.present();
+																																															     });
+
+																																			                                                                                                               });
+																																			                                                                                                                 }
+																																			
+																																			                                                                                                                         }
