@@ -20,7 +20,7 @@ const routes: Routes = [
     loadChildren: () => import('./make-appointment/make-appointment.module').then( m => m.MakeAppointmentPageModule)
   },
   {
-    path: 'edit-appointment',
+    path: 'edit-appointment/:id',
     loadChildren: () => import('./edit-appointment/edit-appointment.module').then( m => m.EditAppointmentPageModule)
   },
   {
@@ -34,6 +34,10 @@ const routes: Routes = [
   {
     path: 'add-music',
     loadChildren: () => import('./add-music/add-music.module').then( m => m.AddMusicPageModule)
+  },
+  {
+    path: 'edit-song/:id',
+    loadChildren: () => import('./edit-song/edit-song.module').then( m => m.EditSongPageModule)
   }
 
 ];
