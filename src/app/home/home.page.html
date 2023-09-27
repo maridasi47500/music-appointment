@@ -29,3 +29,27 @@
 																										            </div>
 																											        </ion-item>
 																												  </ion-list>
+	  <ion-list class="ios list-ios hydrated">
+		      <ion-list-header class="ios hydrated">
+			            Songs
+				        </ion-list-header>
+					    <ion-item *ngFor="let song of Songs" class="song-list">
+						          <ion-label>
+								          <h5>
+										  <ion-icon name="title"></ion-icon> {{song.artist}} - {{song.title}}
+											            </h5>
+												            <p>
+													    <a href="javascript:void(0)" (click)="download(song.filepath)"><ion-icon name="music"></ion-icon> {{song.name}}
+													    </a>
+														              </p>
+															            </ion-label>
+																          <div class="item-note" item-end>
+																		          <button ion-button clear [routerLink]="['/edit-song/', song.$key]">
+																				            <ion-icon name="create" style="zoom:2.0"></ion-icon>
+																					            </button>
+																						            <button ion-button clear (click)="deleteSong(song.$key)">
+																								              <ion-icon name="trash" style="zoom:2.0"></ion-icon>
+																									              </button>
+																										            </div>
+																											        </ion-item>
+																												  </ion-list>

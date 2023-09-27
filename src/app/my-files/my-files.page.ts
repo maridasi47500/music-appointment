@@ -10,7 +10,15 @@ import {
 	    AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
 import { ModalController } from '@ionic/angular';
-import { ModalExampleComponent } from './modal-example.component';
+import { AddMusicPage } from '../add-music/add-music.page';
+import { ViewChild } from '@angular/core';
+import { IonModal } from '@ionic/angular';
+import { OverlayEventDetail } from '@ionic/core/components';
+import { SongService } from './../shared/song.service';
+import { Router } from '@angular/router';
+import { Song } from '../shared/Song';
+
+
 export interface imgFile {
 	  name: string;
 	    filepath: string;
@@ -20,6 +28,9 @@ export interface musicFile {
 	  name: string;
 	    filepath: string;
 	      size: number;
+	      title: string;
+	      artist:string;
+	      
 }
 
 @Component({
@@ -30,6 +41,36 @@ export interface musicFile {
 export class MyFilesPage {
 	  message = 'This modal example uses the modalController to present and dismiss modals.';
 	  myfilename:string="";
+	  artist:string="";
+	  title:string="";
+	    @ViewChild(IonModal) modal: IonModal;
+	      cancel() {
+		          this.modal.dismiss(null, 'cancel');
+			    }
+
+			      confirm() {
+				          this.modal.dismiss({artist: this.artist, title: this.title}, 'confirm');
+					    }
+
+					      onWillDismiss(event: Event) {
+						          const ev = event as CustomEvent<OverlayEventDetail<string>>;
+ const activeTabPage = document.querySelector('.md.ion-page.hydrated') as HTMLInputElement;
+if (activeTabPage){
+    activeTabPage.style.zIndex ="0";
+}
+							      if (ev.detail.role === 'confirm') {
+								            this.message = `Hello, ${ev.detail.data}!`;
+									        }
+										  }
+										  openmymodal(){
+											  
+
+ const activeTabPage = document.querySelector('.md.ion-page.hydrated') as HTMLInputElement;
+if (activeTabPage){
+    activeTabPage.style.zIndex ="1";
+}
+										  }
+
 
 	// File upload task
 	   fileUploadTask: AngularFireUploadTask;
@@ -49,6 +90,8 @@ export class MyFilesPage {
 	                               isFileUploaded: boolean;
 	                                 private filesCollection: AngularFirestoreCollection<musicFile>;
 	                                   constructor(
+	                                       private router: Router,
+	                                       private songService: SongService,
 	                                       private afs: AngularFirestore,
 					       private modalCtrl: ModalController,
 	                                           private afStorage: AngularFireStorage
@@ -61,16 +104,25 @@ export class MyFilesPage {
 	                                                                   }
 									     async openModal() {
 										         const modal = await this.modalCtrl.create({
-												       component: ModalExampleComponent,
+												       component: AddMusicPage,cssClass: "modal-fullscreen",
 												       componentProps: { myfilename: this.myfilename }
 												           });
-													       modal.present();
+ const activeTabPage = document.querySelector('.ion-page') as HTMLInputElement;
+if (activeTabPage){
+    activeTabPage.style.zIndex ="1";
+}
+                                                                                                         modal.present();
 
-													           const { data, role } = await modal.onWillDismiss();
+                                                                                                            const { data, role } = await modal.onWillDismiss();
+                                                                                                 activeTabPage.style.zIndex = "0";
 
-														       if (role === 'confirm') {
-															             this.message = `Hello, ${data}!`;
-																         }
+                                                                                                            if (role === 'confirm') {
+                                                                                                              this.message = `Hello, ${data}!`;
+                                                                                                            }
+
+													           
+
+
 																	   }
 	                                                                     uploadImage(event: FileList) {
 	                                                                         const file: any = event.item(0);
@@ -96,15 +148,28 @@ export class MyFilesPage {
 	                                                                                                                                                                       this.UploadedImageURL = imageRef.getDownloadURL();
 	                                                                                                                                                                               this.UploadedImageURL.subscribe(
 	                                                                                                                                                                                         (resp) => {
-	                                                                                                                                                                                                     this.storeFilesFirebase({
+																									 var myhash={
 	                                                                                                                                                                                                                   name: file.name,
 	                                                                                                                                                                                                                                 filepath: resp,
-	                                                                                                                                                                                                                                               size: this.imgSize,
-	                                                                                                                                                                                                                                                           });
+	                                                                       artist:this.artist,
+title: this.title,									       size: this.imgSize,
+	                                                                                                                                                                                                                                                           };
+																																   var mysong=new Song;
+																																   mysong.name = file.name;
+	                                                               mysong.artist = this.artist;
+	                                                               mysong.filepath = resp;
+                                                                       mysong.title = this.title;
+                                                                       mysong.size = this.imgSize;
+	                                                                                                                                                                                                     this.storeFilesFirebase(myhash);
 	                                                                                                                                                                                                                                                                       this.isFileUploading = false;
 	                                                                                                                                                                                                                                                                                   this.isFileUploaded = true;
-																																			   this.myfilename=file.name;
-																																			   this.openModal();
+																																			   this.songService
+																																			           .createSong(mysong)
+																																				           .then((res) => {
+																																						             console.log(res);
+																																								                 this.router.navigate(['/home']);
+																																										         })
+																																											         .catch((error: any) => console.log(error));
 
 	                                                                                                                                                                                                                                                                                             },
 	                                                                                                                                                                                                                                                                                                       (error) => {

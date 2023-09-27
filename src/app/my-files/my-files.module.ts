@@ -14,6 +14,8 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { FormatFileSizePipe } from './format-file-size.pipe';
+import { ModalController } from '@ionic/angular';
+import { AddMusicPage } from '../add-music/add-music.page';
 
 @NgModule({
   imports: [

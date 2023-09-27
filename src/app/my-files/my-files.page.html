@@ -1,10 +1,37 @@
 <ion-header [translucent]="true">
 	  <ion-toolbar>
-		      <ion-title> Ionic Firebase File Upload Demo </ion-title>
+		      <ion-title> Ajouter une chanson </ion-title>
 		        </ion-toolbar>
 </ion-header>
 <ion-content>
-	  <ion-card class="ion-text-center" *ngIf="!isFileUploading && !isFileUploaded">
+	<ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)" class="mymodalyes">
+	      <ng-template>
+		            <ion-header>
+				            <ion-toolbar>
+						              <ion-buttons slot="start">
+								                  <ion-button (click)="cancel()">Cancel</ion-button>
+										            </ion-buttons>
+											              <ion-title>Welcome</ion-title>
+												                <ion-buttons slot="end">
+															            <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+																              </ion-buttons>
+																	              </ion-toolbar>
+																		            </ion-header>
+																			          <ion-content class="ion-padding">
+																					          <ion-item>
+																							            <ion-label position="stacked">Enter the artist name </ion-label>
+																								              <ion-input type="text" placeholder="Your artist 's name" [(ngModel)]="artist"></ion-input>
+																									              </ion-item>
+																					          <ion-item>
+																							            <ion-label position="stacked">Enter your title</ion-label>
+																								              <ion-input type="text" placeholder="title of your song" [(ngModel)]="title"></ion-input>
+																									              </ion-item>
+																										            </ion-content>
+																											        </ng-template>
+																												  </ion-modal>
+																													    <ion-button id="open-modal" expand="block" (click)="openmymodal()">Open</ion-button>
+
+	  <ion-card class="ion-text-center" *ngIf="title && artist && !isFileUploading && !isFileUploaded">
 		      <ion-card-header>
 			            <ion-card-title>Choose Images to Upload</ion-card-title>
 				        </ion-card-header>

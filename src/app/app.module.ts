@@ -23,7 +23,7 @@ import { environment } from '../environments/environment';
 
 
 @NgModule({
-  declarations: [AppComponent,MyFilesPage, AddMusicPage],
+  declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
 	        AngularFireModule.initializeApp(environment.firebaseConfig),
       AngularFireAuthModule,
@@ -33,6 +33,6 @@ import { environment } from '../environments/environment';
       AngularFireDatabaseModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

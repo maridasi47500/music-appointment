@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/Z:/home/cleojeanne/ionic-music/.eslintrc.json</file>
+            <file>file:/Z:/home/cleojeanne/ionic-music/src/environments/environment.prod.ts</file>
+            <file>file:/Z:/home/cleojeanne/ionic-music/package.json</file>
+            <file>file:/Z:/home/cleojeanne/ionic-music/src/app/tab1/tab1.page.ts</file>
+            <file>file:/Z:/home/cleojeanne/ionic-music/src/app/app.component.ts</file>
+            <file>file:/Z:/home/cleojeanne/ionic-music/src/app/services/migrations.service.ts</file>
+            <file>file:/Z:/home/cleojeanne/ionic-music/src/app/pages/songs/songs.page.html</file>
+            <file>file:/Z:/home/cleojeanne/ionic-music/src/app/pages/songs/update-song-modal/update-song-modal.component.scss</file>
+            <file>file:/Z:/home/cleojeanne/ionic-music/src/app/test/downloadfromhttp/downloadfromhttp.page.ts</file>
+            <file>file:/Z:/home/cleojeanne/ionic-music/src/app/repositories/song.repository.ts</file>
+            <file>file:/Z:/home/cleojeanne/ionic-music/src/main.ts</file>
+            <file>file:/Z:/home/cleojeanne/ionic-music/nbproject/project.xml</file>
+            <file>file:/Z:/home/cleojeanne/ionic-music/src/app/entity/Song.ts</file>
+            <file>file:/Z:/home/cleojeanne/ionic-music/src/app/test/utils/types-test-utils.ts</file>
+            <file>file:/Z:/home/cleojeanne/ionic-music/environment.prod.ts</file>
+            <file>file:/Z:/home/cleojeanne/ionic-music/src/app/app.module.ts</file>
+            <file>file:/Z:/home/cleojeanne/ionic-music/src/environments/environment.ts</file>
+            <file>file:/Z:/home/cleojeanne/ionic-music/src/app/app.component.scss</file>
+            <file>file:/Z:/home/cleojeanne/ionic-music/src/app/pages/songs/songs.page.ts</file>
+            <file>file:/Z:/home/cleojeanne/ionic-music/src/app/services/initialize.app.service.ts</file>
+            <file>file:/Z:/home/cleojeanne/ionic-music/src/app/pages/songs/songs.module.ts</file>
+            <file>file:/Z:/home/cleojeanne/ionic-music/src/app/services/sqlite.service.ts</file>
+            <file>file:/Z:/home/cleojeanne/ionic-music/nbproject/private/private.properties</file>
+        </group>
+    </open-files>
+</project-private>

@@ -25,6 +25,7 @@ export class MakeAppointmentPage implements OnInit {
 											      if (!this.bookingForm.valid) {
 												            return false;
 													        } else {
+															console.log(this.bookingForm.value);
 															      return this.aptService
 															              .createBooking(this.bookingForm.value)
 																              .then((res) => {
@@ -32,7 +33,7 @@ export class MakeAppointmentPage implements OnInit {
 																				          this.bookingForm.reset();
 																					            this.router.navigate(['/home']);
 																						            })
-																							            .catch((error) => console.log(error));
+																							            .catch((error: any) => console.log(error));
 																								        }
 																									  }
 }
