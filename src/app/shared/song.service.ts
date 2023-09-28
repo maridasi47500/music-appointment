@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
+import { take } from 'rxjs/operators';
 import { Song } from '../shared/Song';
+import { getStorage, ref, deleteObject } from "firebase/storage";
+
+import {
+	  AngularFireStorage
+} from '@angular/fire/compat/storage';
 import {
 	  AngularFireDatabase,
 	    AngularFireList,
@@ -11,7 +17,7 @@ import {
 export class SongService {
 	  bookingListRef: AngularFireList<any>;
 	    bookingRef: AngularFireObject<any>;
-	      constructor(private db: AngularFireDatabase) {}
+	      constructor(private db: AngularFireDatabase,private mystorage: AngularFireStorage) {}
 	        // Create
 	       createSong(apt: Song) {
 	             return this.bookingListRef.push({
@@ -26,6 +32,10 @@ export class SongService {
 	                                         getSong(id: string) {
 	                                             this.bookingRef = this.db.object('/song/' + id);
 	                                                 return this.bookingRef;
+	                                                   }
+	                                         getMySong(id: string) {
+	                                             this.bookingRef = this.db.object('/song/' + id);
+	                                                 return this.bookingRef.valueChanges();
 	                                                   }
 	                                                     // Get List
 	                                                       getSongList() {
@@ -43,8 +53,19 @@ export class SongService {
 	                                                                                               });
 	                                                                                                 }
 	                                                                                                   // Delete
-	                                                                                                     deleteSong(id: string) {
+	                                                                                                     async deleteSong(id: string) {
+														     var mysong=this.getMySong(id);
+														     mysong.pipe(take(1)).subscribe(item => {
+														     const storage = getStorage();
+														     this.mystorage.storage.refFromURL(item.filepath.split("?")[0]).delete();
+
+
 	                                                                                                         this.bookingRef = this.db.object('/song/' + id);
 	                                                                                                             this.bookingRef.remove();
+																         });
+
+
+
+
 	                                                                                                               }
 	                                                                                                               }
