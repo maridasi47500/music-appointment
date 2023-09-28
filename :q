@@ -130,7 +130,7 @@ if (activeTabPage){
 	                                                                         const file: any = event.item(0);
 	                                                                             // Image validation
 										  console.log(file.type.split('/')[0])
-	                                                                                 if (file.type.split('/')[0] !== 'video' && file.type.split('/')[0] !== 'audio') {
+	                                                                                 if (file.type.split('/')[0] !== 'video' || file.type.split('/')[0] !== 'audio') {
 	                                                                                       console.log('File type is not supported!');
 	                                                                                             return;
 	                                                                                                 }
@@ -173,10 +173,6 @@ title: this.title,									       size: this.imgSize,
 																																			           .createSong(mysong)
 																																				           .then((res) => {
 																																						             console.log(res);
-	                                                                                                                                                                                                                                                                       this.isFileUploading = false;
-	                                                                                                                                                                                                                                                                                   this.isFileUploaded = false;
-																																			   this.artist='';
-																																			   this.title='';
 																																								                 this.router.navigate(['/home']);
 																																										         })
 																																											         .catch((error: any) => console.log(error));

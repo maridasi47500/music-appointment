@@ -18,6 +18,9 @@ export class EditSongPage implements OnInit {
 				        ) {
 						    this.id = this.actRoute.snapshot.paramMap.get('id');
 						        this.songService.getSong(this.id).valueChanges().subscribe((res: any) => {
+								if (typeof res.mytype !== "string"){
+									res.mytype="video";
+								}
 								      this.updateSongForm.setValue(res);
 								          });
 									    }
@@ -27,6 +30,7 @@ export class EditSongPage implements OnInit {
 													      title: [''],
 													      filepath: [''],
 													      name: [''],
+													      mytype: [''],
 													     size: ['']
 														        })
 															    console.log(this.updateSongForm.value)
