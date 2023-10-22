@@ -42,6 +42,9 @@
 													    <a href="javascript:void(0)" (click)="download(song.filepath)"><ion-icon name="music"></ion-icon> {{song.name}}
 													    </a>
 														              </p>
+												            <p>
+													    <audio src="{{song.filepath}}" controls></audio>
+														              </p>
 															            </ion-label>
 																          <div class="item-note" item-end>
 																		          <button ion-button clear [routerLink]="['/edit-song/', song.$key]">

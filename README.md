@@ -36,6 +36,11 @@ export const environment = {
           }
 };
 ```
+- faire  un 
+```
+npm i --legacy-peer-deps
+```
+avant de le lancer
 
 * enjoy
 # music-appointment
