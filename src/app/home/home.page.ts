@@ -10,6 +10,10 @@ import { SongService } from './../shared/song.service';
 })
 export class HomePage implements OnInit {
 	  Bookings: any = [];
+	  mykeys: any = [];
+	  mysrc: string="";
+	  mySongs: any = {};
+	  audio:any;
 	  Songs: any = [];
 	    constructor(private aptService: AppointmentService, private songService: SongService) {}
 	      ngOnInit() {
@@ -20,17 +24,24 @@ export class HomePage implements OnInit {
 						      res.forEach((item) => {
 							              let a: any = item.payload.toJSON();
 								              a['$key'] = item.key;
-									              this.Bookings.push(a as Appointment);
+									              this.Bookings.push(a as Appointment)
+
 										            });
 											        });
 		          this.fetchSongs();
 			      let songRes = this.songService.getSongList();
 			          songRes.snapshotChanges().subscribe((res) => {
-					        this.Songs = [];
+					        this.mySongs = [];
 						      res.forEach((item) => {
 							              let a: any = item.payload.toJSON();
 								              a['$key'] = item.key;
-									              this.Songs.push(a as Song);
+
+									              this.mySongs[a["title"][0]]||=[]
+									              this.mySongs[a["artist"][0]]||=[]
+									              this.mySongs[a["artist"][0]].push(a as Song)
+									              this.mySongs[a["title"][0]].push(a as Song)
+
+										      this.mykeys=Object.keys(this.mySongs).sort()
 										            });
 											        });
 												  }
@@ -64,6 +75,26 @@ export class HomePage implements OnInit {
 																							        }
 																								download(url: string){
 																									  window.open(url, "_blank");
+																								}
+																								pausemusic(){
+																									  if(this.audio){
+																										  this.audio.pause()
+																										  this.audio.currentTime=0
+																									  }
+																								}
+																								jouer(url: string){
+																									  if(this.audio){
+																										  this.audio.pause()
+																										  this.audio.currentTime=0
+																									  }
+																									  this.audio = new Audio(); 
+																									  this.audio.src = url
+																									  this.audio.load()
+																									  this.audio.play()
+
+																								}
+																								jouerchanson($ev:any){
+																									  $ev.target.play()
 																								}
 
 

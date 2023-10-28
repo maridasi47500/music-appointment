@@ -6,6 +6,7 @@
 					  </ion-toolbar>
 </ion-header>
 <ion-content>
+	<div class="mylist">
 	  <ion-list class="ios list-ios hydrated">
 		      <ion-list-header class="ios hydrated">
 			            Appointments
@@ -33,17 +34,22 @@
 		      <ion-list-header class="ios hydrated">
 			            Songs
 				        </ion-list-header>
-					    <ion-item *ngFor="let song of Songs" class="song-list">
+					    <div *ngFor="let a of mykeys" class="song-list">
+						    <div>{{a}}</div>
+					    <ion-item *ngFor="let song of mySongs[a]" class="song-list">
 						          <ion-label>
 								          <h5>
 										  <ion-icon name="title"></ion-icon> {{song.artist}} - {{song.title}}
 											            </h5>
 												            <p>
+													    <a href="javascript:void(0)" (click)="jouer(song.filepath)">JOUER
+													    </a>
 													    <a href="javascript:void(0)" (click)="download(song.filepath)"><ion-icon name="music"></ion-icon> {{song.name}}
 													    </a>
+
 														              </p>
 												            <p>
-													    <audio src="{{song.filepath}}" controls></audio>
+
 														              </p>
 															            </ion-label>
 																          <div class="item-note" item-end>
@@ -55,4 +61,11 @@
 																									              </button>
 																										            </div>
 																											        </ion-item>
+																											        </div>
 																												  </ion-list>
+	</div>
+	<div *ngIf="audio && !audio.paused"  class="myplayer">
+		<a href="javascript:void(0)" (click)="pausemusic()">pause</a>
+	</div>
+
+</ion-content>
