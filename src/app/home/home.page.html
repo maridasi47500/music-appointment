@@ -64,8 +64,13 @@
 																											        </div>
 																												  </ion-list>
 	</div>
-	<div *ngIf="audio && !audio.paused"  class="myplayer">
-		<a href="javascript:void(0)" (click)="pausemusic()">pause</a>
+	<div *ngIf="audio"  class="myplayer">
+		<a href="javascript:void(0)" (click)="pausemusic()">{{playpause}}</a>
+		<input type="range" max="{{sliderMax}}" (change)="myChange($event)" (click)="myClick($event)"  (input)="myInput($event)" id="seek-slider" value="{{slidervalue}}">
+		  <span id="currentTime">{{currentTimeContainer}} /</span>
+		  <span id="div1">{{durationContainer}}</span>
+
+
 	</div>
 
 </ion-content>
