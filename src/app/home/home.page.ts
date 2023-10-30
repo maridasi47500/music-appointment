@@ -123,7 +123,7 @@ displayDuration () {
 
 																								jouer(url: string){
 																									
-																									  if(this.audio && !this.audio.paused){
+																									  if(this.audio){
 																									  if(!this.audio.paused){
 
 																										  this.audio.pause()
@@ -135,7 +135,6 @@ displayDuration () {
 																									  this.audio.src = url
 
 																									  //this.audio.load()
-																										  this.audio.currentTime=0
 																									  this.audio.play()
 																									  this.playpause="pause"
 
