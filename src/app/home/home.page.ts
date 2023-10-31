@@ -13,6 +13,8 @@ export class HomePage implements OnInit {
 	durationContainer:any="00:00";
 	playpause:any="";
 	slidervalue:any=0.0;
+	maxvolume:any=100.0;
+	volumevalue:any=0.0;
 	sliderMax:any=100.0;
 	  Bookings: any = [];
 	  mykeys: any = [];
@@ -24,6 +26,7 @@ export class HomePage implements OnInit {
 	    constructor(private aptService: AppointmentService, private songService: SongService) {}
 	      ngOnInit() {
 																									  this.audio = new Audio(); 
+																									  this.volumevalue=this.audio.volume * 100;
 																									  this.audio.addEventListener('timeupdate', () => {
   this.currentTimeContainer = this.calculateTime(this.audio.currentTime);
   this.durationContainer = this.calculateTime(this.audio.duration);
@@ -158,6 +161,12 @@ myClick($ev:any){
 myChange($ev:any){
 	this.audio.currentTime=$ev.target.value
 
+}
+myvolume($ev:any){
+	  var value = $ev.target.value;
+
+  //this.volumevalue.textContent = value;
+  this.audio.volume = value / 100;
 }
 
 }

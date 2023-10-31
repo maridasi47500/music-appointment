@@ -101,3 +101,19 @@ input[type="range"]:active::-ms-thumb {
   transform: scale(1.2);
   background: #007db5;
 }
+#volume-slider {
+	width:30%;
+	float:right;
+	text-align:center;
+	display:flex;
+}
+#volume-slider [name="volume-low-outline"] {
+	float:left;
+}
+#volume-slider [name="volume-high-outline"] {
+
+	float:right;
+}
+#volume-slider input {
+	width:80%;
+}

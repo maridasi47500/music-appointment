@@ -69,6 +69,9 @@
 		<input type="range" max="{{sliderMax}}" (change)="myChange($event)" (click)="myClick($event)"  (input)="myInput($event)" id="seek-slider" value="{{slidervalue}}">
 		  <span id="currentTime">{{currentTimeContainer}} /</span>
 		  <span id="div1">{{durationContainer}}</span>
+		  <span id="volume-slider"><ion-icon name="volume-low-outline"></ion-icon>
+			  <input type="range"  max="{{maxvolume}}" value="{{volumevalue}}" (input)="myvolume($event)"><ion-icon name="volume-high-outline"></ion-icon></span>
+
 
 
 	</div>
