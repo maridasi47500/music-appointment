@@ -24,6 +24,38 @@ export class HomePage implements OnInit {
 
 	  Songs: any = [];
 	    constructor(private aptService: AppointmentService, private songService: SongService) {}
+	    partitre(){
+		          this.fetchSongs();
+			      let songRes = this.songService.getSongList();
+			          songRes.snapshotChanges().subscribe((res) => {
+					        this.mySongs = [];
+						      res.forEach((item) => {
+							              let a: any = item.payload.toJSON();
+								              a['$key'] = item.key;
+
+									              this.mySongs[a["title"][0]]||=[]
+									              this.mySongs[a["title"][0]].push(a as Song)
+
+										      this.mykeys=Object.keys(this.mySongs).sort()
+										            });
+											        });
+	    }
+	    parartiste(){
+		          this.fetchSongs();
+			      let songRes = this.songService.getSongList();
+			          songRes.snapshotChanges().subscribe((res) => {
+					        this.mySongs = [];
+						      res.forEach((item) => {
+							              let a: any = item.payload.toJSON();
+								              a['$key'] = item.key;
+
+									              this.mySongs[a["artist"][0]]||=[]
+									              this.mySongs[a["artist"][0]].push(a as Song)
+
+										      this.mykeys=Object.keys(this.mySongs).sort()
+										            });
+											        });
+	    }
 	      ngOnInit() {
 																									  this.audio = new Audio(); 
 																									  this.volumevalue=this.audio.volume * 100;
@@ -52,22 +84,8 @@ if (this.audio.readyState > 0) {
 
 										            });
 											        });
-		          this.fetchSongs();
-			      let songRes = this.songService.getSongList();
-			          songRes.snapshotChanges().subscribe((res) => {
-					        this.mySongs = [];
-						      res.forEach((item) => {
-							              let a: any = item.payload.toJSON();
-								              a['$key'] = item.key;
+												this.parartiste();
 
-									              this.mySongs[a["title"][0]]||=[]
-									              this.mySongs[a["artist"][0]]||=[]
-									              this.mySongs[a["artist"][0]].push(a as Song)
-									              this.mySongs[a["title"][0]].push(a as Song)
-
-										      this.mykeys=Object.keys(this.mySongs).sort()
-										            });
-											        });
 												  }
 												    fetchBookings() {
 													        this.aptService
