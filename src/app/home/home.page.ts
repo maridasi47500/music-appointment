@@ -161,6 +161,26 @@ displayDuration () {
 
 
 																								}
+																								repeter(url: string){
+																									
+																									  if(this.audio){
+																									  if(!this.audio.paused){
+
+																										  this.audio.pause()
+																									  }
+																										  this.audio.currentTime=0
+
+																									  }
+
+																									  this.audio.src = url
+
+																									  //this.audio.load()
+																									  this.audio.playbackRate = 0.85;
+																									  this.audio.play()
+																									  this.playpause="pause"
+
+
+																								}
 																								jouerchanson($ev:any){
 																									  $ev.target.play()
 																								}
@@ -174,6 +194,10 @@ myInput($ev:any){
 
 }
 myClick($ev:any){
+
+}
+mChange($ev:any){
+	this.audio.playbackRate=parseFloat($ev.target.value)/100.0
 
 }
 myChange($ev:any){

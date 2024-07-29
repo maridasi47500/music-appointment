@@ -48,6 +48,8 @@
 												            <p>
 													    <a href="javascript:void(0)" (click)="jouer(song.filepath)">JOUER
 													    </a>
+													    <a href="javascript:void(0)" (click)="repeter(song.filepath)">REPETER
+													    </a>
 													    <a href="javascript:void(0)" (click)="download(song.filepath)"><ion-icon name="music"></ion-icon> {{song.name}}
 													    </a>
 
@@ -69,7 +71,11 @@
 																												  </ion-list>
 	</div>
 	<div *ngIf="audio"  class="myplayer">
+		<input type="range" max="130" (change)="mChange($event)" (click)="mClick($event)"   id="sek-slider" value="100">
+		vite
+		<br><hr>
 		<a href="javascript:void(0)" (click)="pausemusic()">{{playpause}}</a>
+
 		<input type="range" max="{{sliderMax}}" (change)="myChange($event)" (click)="myClick($event)"  (input)="myInput($event)" id="seek-slider" value="{{slidervalue}}">
 		  <span id="currentTime">{{currentTimeContainer}} /</span>
 		  <span id="div1">{{durationContainer}}</span>
