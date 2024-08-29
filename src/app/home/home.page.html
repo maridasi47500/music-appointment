@@ -71,8 +71,13 @@
 																												  </ion-list>
 	</div>
 	<div *ngIf="audio"  class="myplayer">
+		<span>&#128034;
+
+		</span>
 		<input type="range" max="130" (change)="mChange($event)" (click)="mClick($event)"   id="sek-slider" value="100">
-		vite
+		<span>vite
+			&#128665;
+		</span>
 		<br><hr>
 		<a href="javascript:void(0)" (click)="pausemusic()">{{playpause}}</a>
 
